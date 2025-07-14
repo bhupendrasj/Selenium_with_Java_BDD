@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: runners.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.317 s <<< FAILURE! -- in runners.TestRunner
+Login Functionality.Login with valid credentials -- Time elapsed: 0.295 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.get(String)" because "stepdefinitions.Hooks.driver" is null
+	at stepdefinitions.Login.userIsOnLoginPage(Login.java:15)
+	at ✽.user is on the LambdaPlayground login page(file:///Z:/BDD/ecommerce/src/test/resources/features/Login.feature:5)
+
