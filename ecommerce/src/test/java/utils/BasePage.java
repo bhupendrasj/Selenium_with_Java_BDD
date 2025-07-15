@@ -31,6 +31,7 @@ public abstract class BasePage {
             scrollToElement(locator);
             highlightElement(locator);
             element.click();
+            unhighlightElement(locator);
         } else {
             throw new NoSuchElementException("Element not found: " + locator);
         }
@@ -42,6 +43,7 @@ public abstract class BasePage {
             highlightElement(locator);
             scrollToElement(locator);
             jsExecutor.executeScript("arguments[0].click();", element);
+            unhighlightElement(locator);
         } else {
             throw new NoSuchElementException("Element not found: " + locator);
         }
@@ -53,6 +55,7 @@ public abstract class BasePage {
             scrollToElement(locator);
             highlightElement(locator);
             element.clear();
+            unhighlightElement(locator);
         } else {
             throw new NoSuchElementException("Element not found: " + locator);
         }
@@ -65,6 +68,7 @@ public abstract class BasePage {
             highlightElement(locator);
             element.clear();
             element.sendKeys(text);
+            unhighlightElement(locator);
         } else {
             throw new NoSuchElementException("Element not found: " + locator);
         }
@@ -77,6 +81,7 @@ public abstract class BasePage {
             highlightElement(locator);
             element.clear();
             jsExecutor.executeScript("arguments[0].value='" + text + "';", element);
+            unhighlightElement(locator);
         } else {
             throw new NoSuchElementException("Element not found: " + locator);
         }
@@ -87,6 +92,7 @@ public abstract class BasePage {
         if (element != null) {
             scrollToElement(locator);
             highlightElement(locator);
+            unhighlightElement(locator);
             return element.getText();
         }   else {
             throw new NoSuchElementException("Element not found: " + locator);  
@@ -97,6 +103,7 @@ public abstract class BasePage {
             WebElement element = findElement(locator);
             scrollToElement(locator);
             highlightElement(locator);
+            unhighlightElement(locator);
             return element.isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
@@ -109,6 +116,7 @@ public abstract class BasePage {
         highlightElement(locator);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        unhighlightElement(locator);
     }
 
     public static void waitForElementToBeClickable(By locator, int timeoutInSeconds) {
@@ -117,6 +125,7 @@ public abstract class BasePage {
         highlightElement(locator);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
+            unhighlightElement(locator);
     }
 
     public static void waitForElementToDisappear(By locator, int timeoutInSeconds) {
