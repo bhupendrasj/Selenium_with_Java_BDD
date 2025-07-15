@@ -6,12 +6,12 @@ pipeline {
         jdk 'jdk-21'
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/bhupendrasj/Selenium_with_Java_BDD.git'
-            }
-        }
+    stage('Checkout') {
+    steps {
+        git url: 'https://github.com/bhupendrasj/Selenium_with_Java_BDD.git', branch: 'main'
+    }
+}
+
 
         stage('Debug') {
             steps {
