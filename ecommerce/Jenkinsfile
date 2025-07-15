@@ -7,15 +7,32 @@ pipeline {
     }
 
     stages {
-        stage('Debug') {
+        stage('Checkout') {
             steps {
-                echo '✅ Jenkinsfile is being executed'
+                git 'https://github.com/bhupendrasj/Selenium_with_Java_BDD.git'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'mvn clean test'
+                dir('ecommerce') {
+                    bat 'mvn clean test'
+                }
+            }
+        }
+
+        stage('Publish Report') {
+            steps {
+                dir('ecommerce') {
+                    publishHTML(target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'target/cucumber-reports',
+                        reportFiles: 'index.html',
+                        reportName: 'Cucumber Test Report'
+                    ])
+                }
             }
         }
     }
