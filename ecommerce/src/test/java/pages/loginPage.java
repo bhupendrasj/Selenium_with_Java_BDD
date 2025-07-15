@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.BasePage;
 
-public abstract class loginPage extends BasePage {
+public class loginPage extends BasePage {
     public loginPage(WebDriver driver) {
         super(driver);
         //TODO Auto-generated constructor stub
@@ -17,7 +17,7 @@ public abstract class loginPage extends BasePage {
     static By passwordField = By.id("password");
     static By loginButton = By.id("login");
 
-    public static void RegisterUser() {
+    public void RegisterUser() {
         waitForElementToBeVisible(myAccountDrp, 10);
         clickElement(myAccountDrp);
         waitForElementToBeVisible(registerBtn, 10);

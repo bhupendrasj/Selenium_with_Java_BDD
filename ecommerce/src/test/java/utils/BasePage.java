@@ -89,11 +89,13 @@ public abstract class BasePage {
     }
 
     public static void waitForElementToBeVisible(By locator, int timeoutInSeconds) {
+        System.out.println("Waiting for element to be visible");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public static void waitForElementToBeClickable(By locator, int timeoutInSeconds) {
+        System.out.println("Waiting for element to be clickable");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }

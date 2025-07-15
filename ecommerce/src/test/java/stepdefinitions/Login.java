@@ -5,21 +5,18 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.loginPage;
 
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-
-public class Login extends loginPage {
+public class Login {
     // WebDriver driver = Hooks.driver;  // ✅ Getting driver from Hooks
+    private pages.loginPage loginPage;
 
-   public Login(WebDriver driver) {
-        super(driver);
-        //TODO Auto-generated constructor stub
+    public Login() {
+        this.loginPage = new loginPage(Hooks.driver); // ✅ Initialize loginPage with the driver
     }
 
 @Given("user is on the LambdaPlayground login page")
 public void userIsOnLoginPage() {
     System.out.println("Hello");
-    RegisterUser();
+    loginPage.RegisterUser();
     // Hooks.driver.get("https://www.lambdatest.com/playground");
     // loginPage = new loginPage(); // ✅ initialize here after driver is ready
 }
