@@ -28,7 +28,8 @@ public abstract class BasePage {
     public static void clickElement(By locator) {
         WebElement element = findElement(locator);
         if (element != null) {
-            // jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+            scrollToElement(locator);
+            highlightElement(locator);
             element.click();
         } else {
             throw new NoSuchElementException("Element not found: " + locator);
@@ -38,7 +39,8 @@ public abstract class BasePage {
     public static void jsclickElement(By locator) {
         WebElement element = findElement(locator);
         if (element != null) {
-            jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+            highlightElement(locator);
+            scrollToElement(locator);
             jsExecutor.executeScript("arguments[0].click();", element);
         } else {
             throw new NoSuchElementException("Element not found: " + locator);
@@ -48,6 +50,8 @@ public abstract class BasePage {
     public static void clearElement(By locator) {
         WebElement element = findElement(locator);
         if (element != null) {
+            scrollToElement(locator);
+            highlightElement(locator);
             element.clear();
         } else {
             throw new NoSuchElementException("Element not found: " + locator);
@@ -57,7 +61,8 @@ public abstract class BasePage {
     public static void enterText(By locator, String text) {
         WebElement element = findElement(locator);
         if (element != null) {
-            jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+            scrollToElement(locator);
+            highlightElement(locator);
             element.clear();
             element.sendKeys(text);
         } else {
@@ -68,7 +73,8 @@ public abstract class BasePage {
     public static void jsenterText(By locator, String text) {
         WebElement element = findElement(locator);
         if (element != null) {
-            jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+            scrollToElement(locator);
+            highlightElement(locator);
             element.clear();
             jsExecutor.executeScript("arguments[0].value='" + text + "';", element);
         } else {
@@ -79,7 +85,8 @@ public abstract class BasePage {
     public static String getElementText(By locator) {
         WebElement element = findElement(locator);
         if (element != null) {
-            jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+            scrollToElement(locator);
+            highlightElement(locator);
             return element.getText();
         }   else {
             throw new NoSuchElementException("Element not found: " + locator);  
@@ -88,7 +95,8 @@ public abstract class BasePage {
     public static boolean isElementDisplayed(By locator) {
         try {
             WebElement element = findElement(locator);
-            jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+            scrollToElement(locator);
+            highlightElement(locator);
             return element.isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
@@ -97,16 +105,16 @@ public abstract class BasePage {
 
     public static void waitForElementToBeVisible(By locator, int timeoutInSeconds) {
         System.out.println("Waiting for element to be visible");
-        WebElement element = findElement(locator);
-        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+        scrollToElement(locator);
+        highlightElement(locator);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public static void waitForElementToBeClickable(By locator, int timeoutInSeconds) {
         System.out.println("Waiting for element to be clickable");
-        WebElement element = findElement(locator);
-        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+        scrollToElement(locator);
+        highlightElement(locator);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
