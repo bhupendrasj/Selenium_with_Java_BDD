@@ -21,7 +21,6 @@ public abstract class BasePage {
         jsExecutor = (JavascriptExecutor) driver;
     }
 
-
     public static WebElement findElement(By locator) {
         return driver.findElement(locator);
     }
