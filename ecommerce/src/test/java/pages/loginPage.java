@@ -13,16 +13,37 @@ public class loginPage extends BasePage {
     // Locators for the login page elements
     static By myAccountDrp = By.xpath("(//*[contains(text(),'My account')])[2]");
     static By registerBtn = By.xpath("//*[contains(@id,'column-right')]//*[contains(text(),'Register')]");
+    static By firstNameFld = By.xpath("//input[contains(@id,'input-firstname')]");
+    static By lastNameFld = By.xpath("//input[contains(@id,'input-lastname')]");
+    static By emailFld = By.xpath("//input[contains(@id,'input-email')]");
+    static By telephoneFld = By.xpath("//input[contains(@id,'input-telephone')]");
+    static By passwordFld = By.xpath("//input[contains(@id,'input-password')]");
+    static By confirmPasswordFld = By.xpath("//input[contains(@id,'input-confirm')]");
+    static By subscribeRadio = By.xpath("//input[@type='radio' and @name='newsletter' and @value='1']");
+    static By agreeCheckbox = By.xpath("//input[@type='checkbox' and @name='agree']");
+    static By continueBtn = By.xpath("//input[@type='submit' and @value='Continue']");
     static By usernameField = By.id("username");
     static By passwordField = By.id("password");
     static By loginButton = By.id("login");
 
-    public void RegisterUser() {
+
+    public void RegisterUser() throws InterruptedException {
         waitForElementToBeVisible(myAccountDrp, 10);
         clickElement(myAccountDrp);
         waitForElementToBeVisible(registerBtn, 10);
         clickElement(registerBtn);
-
+        waitForElementToBeVisible(firstNameFld, 10);
+        enterText(firstNameFld, "John");
+        enterText(lastNameFld, "Doe");
+        enterText(emailFld, "John.Doe@gmail.com");
+        enterText(telephoneFld, "1234567890");
+        enterText(passwordFld, "password123");
+        enterText(confirmPasswordFld, "password123");
+        jsclickElement(subscribeRadio);
+        jsclickElement(agreeCheckbox);
+        Thread.sleep(10000);
+        clickElement(continueBtn);
+         // Wait for the registration to complete
     }
 
     public static void enterUsername(String username) {

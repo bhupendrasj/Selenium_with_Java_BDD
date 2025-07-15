@@ -14,11 +14,8 @@ public class Login {
     }
 
 @Given("user is on the LambdaPlayground login page")
-public void userIsOnLoginPage() {
-    System.out.println("Hello");
+public void userIsOnLoginPage() throws InterruptedException {
     loginPage.RegisterUser();
-    // Hooks.driver.get("https://www.lambdatest.com/playground");
-    // loginPage = new loginPage(); // ✅ initialize here after driver is ready
 }
 
 @When("user enters valid username and password")
