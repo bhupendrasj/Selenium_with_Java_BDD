@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven-3.9'         // 👈 Name configured in Jenkins Global Tools
+        jdk 'jdk-21'              // 👈 Java 21 (must be added under Global Tools)
+    }
+
+    environment {
+        BROWSER = "chrome"        // 👈 Pass browser as env variable if needed
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/bhupendrasj/Selenium_with_Java_BDD.git'
+            }
+        }
+
+        stage('Build and Run Tests') {
+            steps {
+                sh 'mvn clean test -Dcucumber.filter.tags="@smoke"'
+            }
+        }
+
+        stage('Publish Report') {
+            steps {
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'target/cucumber-reports',
+                    reportFiles: 'index.html',
+                    reportName: 'Cucumber Test Report'
+                ])
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
