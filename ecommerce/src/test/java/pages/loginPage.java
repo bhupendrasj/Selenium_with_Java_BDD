@@ -41,7 +41,6 @@ public class loginPage extends BasePage {
         enterText(confirmPasswordFld, "password123");
         jsclickElement(subscribeRadio);
         jsclickElement(agreeCheckbox);
-        Thread.sleep(10000);
         clickElement(continueBtn);
          // Wait for the registration to complete
     }
