@@ -2,12 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven-3.9'         // 👈 Name configured in Jenkins Global Tools
-        jdk 'jdk-21'              // 👈 Java 21 (must be added under Global Tools)
-    }
-
-    environment {
-        BROWSER = "chrome"        // 👈 Pass browser as env variable if needed
+        maven 'Maven-3.9'
+        jdk 'jdk-21'
     }
 
     stages {
@@ -17,9 +13,9 @@ pipeline {
             }
         }
 
-        stage('Build and Run Tests') {
+        stage('Run Tests') {
             steps {
-                sh 'mvn clean test -Dcucumber.filter.tags="@smoke"'
+                bat 'mvn clean test'
             }
         }
 
@@ -34,15 +30,6 @@ pipeline {
                     reportName: 'Cucumber Test Report'
                 ])
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline completed.'
-        }
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
