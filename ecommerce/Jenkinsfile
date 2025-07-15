@@ -7,23 +7,26 @@ pipeline {
     }
 
     stages {
-
         stage('Run Tests') {
             steps {
-                bat 'mvn clean test'
+                dir('ecommerce') {
+                    bat 'mvn clean test'
+                }
             }
         }
 
         stage('Publish Report') {
             steps {
-                publishHTML(target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'target/cucumber-reports',
-                    reportFiles: 'index.html',
-                    reportName: 'Cucumber Test Report'
-                ])
+                dir('ecommerce') {
+                    publishHTML(target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'target/cucumber-reports',
+                        reportFiles: 'index.html',
+                        reportName: 'Cucumber Test Report'
+                    ])
+                }
             }
         }
     }
