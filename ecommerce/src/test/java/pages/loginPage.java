@@ -20,7 +20,7 @@ public class loginPage extends BasePage {
     static By passwordFld = By.xpath("//input[contains(@id,'input-password')]");
     static By confirmPasswordFld = By.xpath("//input[contains(@id,'input-confirm')]");
     static By subscribeRadio = By.xpath("//input[@type='radio' and @name='newsletter' and @value='1']");
-    static By agreeCheckbox = By.xpath("//input[@type='checkbox' and @name='agree']");
+    static By agreeCheckbox = By.xpath("//inputeddd[@type='checkbox' and @name='agree']");
     static By continueBtn = By.xpath("//input[@type='submit' and @value='Continue']");
     static By usernameField = By.id("username");
     static By passwordField = By.id("password");
@@ -28,23 +28,27 @@ public class loginPage extends BasePage {
 
 
     public void RegisterUser() throws InterruptedException {
-        test = extent.createTest("Register User Test");
-        waitForElementToBeVisible(myAccountDrp, 10);
-        clickElement(myAccountDrp);
-        waitForElementToBeVisible(registerBtn, 10);
-        clickElement(registerBtn);
-        waitForElementToBeVisible(firstNameFld, 10);
-        enterText(firstNameFld, "John");
-        enterText(lastNameFld, "Doe");
-        enterText(emailFld, "John.Doe@gmail.com");
-        enterText(telephoneFld, "1234567890");
-        enterText(passwordFld, "password123");
-        enterText(confirmPasswordFld, "password123");
-        jsclickElement(subscribeRadio);
-        jsclickElement(agreeCheckbox);
-        clickElement(continueBtn);
-        test.pass("User registered successfully");
-         // Wait for the registration to complete
+        try{
+            test = extent.createTest("Register User Test");
+            waitForElementToBeVisible(myAccountDrp, 10);
+            clickElement(myAccountDrp);
+            waitForElementToBeVisible(registerBtn, 10);
+            clickElement(registerBtn);
+            waitForElementToBeVisible(firstNameFld, 10);
+            enterText(firstNameFld, "John");
+            enterText(lastNameFld, "Doe");
+            enterText(emailFld, "John.Doe@gmail.com");
+            enterText(telephoneFld, "1234567890");
+            enterText(passwordFld, "password123");
+            enterText(confirmPasswordFld, "password123");
+            jsclickElement(subscribeRadio);
+            jsclickElement(agreeCheckbox);
+            clickElement(continueBtn);
+            test.pass("User registered successfully");
+        
+        } catch (Exception e) {
+            methodFail("registering user", e);
+        }
     }
 
     public static void enterUsername(String username) {

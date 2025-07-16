@@ -1,9 +1,17 @@
 package utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.NoSuchElementException;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,7 +25,7 @@ public abstract class BasePage {
     protected static WebDriver driver;
     protected static JavascriptExecutor jsExecutor;
     protected ExtentReports extent;
-    protected ExtentTest test;
+    protected static ExtentTest test;
 
     
     // Constructor to initialize the WebDriver
@@ -26,6 +34,39 @@ public abstract class BasePage {
         jsExecutor = (JavascriptExecutor) driver;
         extent = ExtentReportManager.getReportInstance();
         test = extent.createTest(this.getClass().getSimpleName());
+    }
+
+    public static void methodStart(String methodName) {
+        System.out.println("***** "+methodName+". *****");
+        test.info("***** "+methodName+". *****");
+    }
+
+    public static void methodEnd(String methodName) {
+        System.out.println(methodName+".");
+        test.info(methodName+".");
+    }
+
+    public static void methodPass(String methodName) {
+        System.out.println(methodName+" - Passed");
+        test.pass(methodName+" - Passed");
+    }
+
+    public static void methodFail(String errorMessage, Exception e) {
+        System.out.println("----- Exception occured while "+errorMessage+". -----");
+        test.fail("----- Exception occured while "+errorMessage+". -----" + e.getMessage()).addScreenCaptureFromPath(takeScreenshot(errorMessage));   
+    }
+
+    public static String takeScreenshot(String screenshotName) {
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+    String path = System.getProperty("user.dir") + "/screenshots/" + screenshotName + "_" + timestamp + ".png";
+    File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    File dest = new File(path);
+    try {
+        FileUtils.copyFile(src, dest);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return path;
     }
 
     public static WebElement findElement(By locator) {
