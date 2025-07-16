@@ -16,6 +16,7 @@ public class Login {
 @Given("user is on the LambdaPlayground login page")
 public void userIsOnLoginPage() throws InterruptedException {
     loginPage.RegisterUser();
+    
 }
 
 @When("user enters valid username and password")

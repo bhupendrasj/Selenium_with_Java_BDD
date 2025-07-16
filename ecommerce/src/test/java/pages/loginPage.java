@@ -28,6 +28,7 @@ public class loginPage extends BasePage {
 
 
     public void RegisterUser() throws InterruptedException {
+        test = extent.createTest("Register User Test");
         waitForElementToBeVisible(myAccountDrp, 10);
         clickElement(myAccountDrp);
         waitForElementToBeVisible(registerBtn, 10);
@@ -42,6 +43,7 @@ public class loginPage extends BasePage {
         jsclickElement(subscribeRadio);
         jsclickElement(agreeCheckbox);
         clickElement(continueBtn);
+        test.pass("User registered successfully");
          // Wait for the registration to complete
     }
 

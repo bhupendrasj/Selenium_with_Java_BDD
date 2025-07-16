@@ -9,16 +9,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
 public abstract class BasePage {
 
     protected static WebDriver driver;
     protected static JavascriptExecutor jsExecutor;
+    protected ExtentReports extent;
+    protected ExtentTest test;
 
-
+    
     // Constructor to initialize the WebDriver
     public BasePage(WebDriver driver) {
         BasePage.driver = driver;
         jsExecutor = (JavascriptExecutor) driver;
+        extent = ExtentReportManager.getReportInstance();
+        test = extent.createTest(this.getClass().getSimpleName());
     }
 
     public static WebElement findElement(By locator) {
