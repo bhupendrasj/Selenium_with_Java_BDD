@@ -20,7 +20,7 @@ public class loginPage extends BasePage {
     static By passwordFld = By.xpath("//input[contains(@id,'input-password')]");
     static By confirmPasswordFld = By.xpath("//input[contains(@id,'input-confirm')]");
     static By subscribeRadio = By.xpath("//input[@type='radio' and @name='newsletter' and @value='1']");
-    static By agreeCheckbox = By.xpath("//inputeddd[@type='checkbox' and @name='agree']");
+    static By agreeCheckbox = By.xpath("//input[@type='checkbox' and @name='agree']");
     static By continueBtn = By.xpath("//input[@type='submit' and @value='Continue']");
     static By usernameField = By.id("username");
     static By passwordField = By.id("password");
