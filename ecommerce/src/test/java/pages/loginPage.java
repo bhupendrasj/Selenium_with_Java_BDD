@@ -1,5 +1,6 @@
 package pages;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.checkerframework.checker.units.qual.m;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,25 +32,35 @@ public class loginPage extends BasePage {
         try{
             test = extent.createTest("Register User Test");
             waitForElementToBeVisible(myAccountDrp, 10);
-            clickElement(myAccountDrp);
+            clickElement(myAccountDrp, "My Account Dropdown");
             waitForElementToBeVisible(registerBtn, 10);
-            clickElement(registerBtn);
+            clickElement(registerBtn, "Register Button");
             waitForElementToBeVisible(firstNameFld, 10);
             enterText(firstNameFld, "John");
             enterText(lastNameFld, "Doe");
-            enterText(emailFld, "John.Doe@gmail.com");
+            String randomText = RandomStringUtils.randomAlphanumeric(19);
+            enterText(emailFld, randomText+"@gmail.com");
             enterText(telephoneFld, "1234567890");
             enterText(passwordFld, "password123");
             enterText(confirmPasswordFld, "password123");
             jsclickElement(subscribeRadio);
             jsclickElement(agreeCheckbox);
-            clickElement(continueBtn);
+            clickElement(continueBtn, "Continue Button");
             test.pass("User registered successfully");
         
         } catch (Exception e) {
             methodFail("registering user", e);
         }
     }
+
+    // @dataProvider(name="loginDataProvider")
+    // public Object[][] loginUser() {
+    //     return new Object[][] {
+    //         {"username1", "testpass1"},
+    //         {"username2", "testpass2"},
+    //         {"username3", "testpass3"}
+    //     };
+    // }       
 
     public static void enterUsername(String username) {
         driver.findElement(usernameField).sendKeys(username);

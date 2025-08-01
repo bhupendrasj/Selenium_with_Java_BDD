@@ -30,6 +30,6 @@ public class Hooks {
     @After
     public void tearDown() {
         extent.flush(); // writes everything to the report
-        DriverFactory.quitDriver();
+        // DriverFactory.quitDriver();
     }    
 }

@@ -52,8 +52,8 @@ public abstract class BasePage {
     }
 
     public static void methodFail(String errorMessage, Exception e) {
-        System.out.println("----- Exception occured while "+errorMessage+". -----");
-        test.fail("----- Exception occured while "+errorMessage+". -----" + e.getMessage()).addScreenCaptureFromPath(takeScreenshot(errorMessage));   
+        System.out.println("----- Exception occured while "+errorMessage+". -----\n"+ e.getMessage());
+        test.fail("----- Exception occured while "+errorMessage+". -----\n" + e.getMessage()).addScreenCaptureFromPath(takeScreenshot(errorMessage));   
     }
 
     public static String takeScreenshot(String screenshotName) {
@@ -73,9 +73,10 @@ public abstract class BasePage {
         return driver.findElement(locator);
     }
     
-    public static void clickElement(By locator) {
+    public static void clickElement(By locator, String WebElement) {
         WebElement element = findElement(locator);
         if (element != null) {
+            System.out.println("Clicking on "+WebElement);
             scrollToElement(locator);
             highlightElement(locator);
             element.click();
@@ -159,6 +160,7 @@ public abstract class BasePage {
     }
 
     public static void waitForElementToBeVisible(By locator, int timeoutInSeconds) {
+        test.info("Waiting for element to be visible");
         System.out.println("Waiting for element to be visible");
         scrollToElement(locator);
         highlightElement(locator);
